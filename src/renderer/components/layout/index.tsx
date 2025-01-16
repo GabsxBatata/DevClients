@@ -1,11 +1,24 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { Header } from '../header'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { Sidebar } from '../sidebar'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function Layout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    function handleNewClient() {
+      navigate('/create')
+    }
+
+    const unsub = window.api.onNewClient(handleNewClient)
+
+    return () => {
+      unsub()
+    }
+  }, [])
 
   return (
     <Collapsible.Root

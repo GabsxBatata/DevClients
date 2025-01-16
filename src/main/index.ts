@@ -2,6 +2,7 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import path, { join } from 'node:path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { createFileRoute, createURLRoute } from 'electron-router-dom'
+import { createTray } from './tray'
 
 function createWindow(): void {
   // Create the browser window.
@@ -21,6 +22,9 @@ function createWindow(): void {
       sandbox: false
     }
   })
+
+  //Chamar para criação do tray
+  createTray(mainWindow)
 
   //Mudar icone para o MAC
   if (process.platform === 'darwin') {
