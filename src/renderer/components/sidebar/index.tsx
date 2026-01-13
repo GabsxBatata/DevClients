@@ -1,4 +1,4 @@
-import * as Collapsible from '@radix-ui/react-collapsible'
+import { Trigger, Content } from '@radix-ui/react-collapsible'
 import { ArrowBendDoubleUpLeft } from 'phosphor-react'
 import clsx from 'clsx'
 import { LinkContent } from '../link'
@@ -6,25 +6,13 @@ import { LinkContent } from '../link'
 function Sidebar() {
   const isMacOS = process.platform === 'darwin'
   return (
-    <Collapsible.Content className="bg-gray-950 flex-shrink-0 border-r border-slate-600 h-screen relative group overflow-hidden data-[state=open]:animate-slideIn data-[state=closed]:animate-slideOut">
-      <Collapsible.Trigger
-        className={clsx(
-          'absolute h-7 w-7 right-4 z-[99] text-white-200 hover:scale-105 duration-200 inline-flex items-center justify-center',
-          {
-            'top-[1.125rem]': isMacOS,
-            'top-6': !isMacOS
-          }
-        )}
-      >
-        <ArrowBendDoubleUpLeft className="w-7 h-7" />
-      </Collapsible.Trigger>
-
+    <Content className="bg-gray-950 flex-shrink-0 border-r border-slate-600 h-screen relative group overflow-hidden data-[state=open]:animate-slideIn data-[state=closed]:animate-slideOut">
       <div
         className={clsx('region-drag h-14 z-0 mt-10', {
           block: isMacOS,
           hidden: !isMacOS
         })}
-      ></div>
+      />
 
       <div
         className={clsx(
@@ -45,7 +33,7 @@ function Sidebar() {
           </section>
         </nav>
       </div>
-    </Collapsible.Content>
+    </Content>
   )
 }
 

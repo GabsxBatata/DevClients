@@ -1,6 +1,7 @@
-import * as Collapsible from '@radix-ui/react-collapsible'
+import { Trigger } from '@radix-ui/react-collapsible'
 import clsx from 'clsx'
 import { CaretRight } from 'phosphor-react'
+import { useState } from 'react'
 
 interface IHeaderProps {
   isSidebarOpen: boolean
@@ -8,7 +9,6 @@ interface IHeaderProps {
 
 function Header({ isSidebarOpen }: IHeaderProps) {
   const isMacOS = process.platform === 'darwin'
-
   return (
     <div
       id="header"
@@ -21,17 +21,17 @@ function Header({ isSidebarOpen }: IHeaderProps) {
         }
       )}
     >
-      <Collapsible.Trigger
+      <Trigger
         className={clsx(
-          'h-7 w-7 text-gray-800 bg-gray-100 p-1 rounded-full relative z[99] top-9 left-0',
-          {
-            hidden: isSidebarOpen,
-            block: !isSidebarOpen
-          }
+          'h-7 w-7 text-gray-800 bg-gray-100 p-1 rounded-full hover:scale-105 duration-200 relative z[99] top-0 left-0'
         )}
       >
-        <CaretRight className="w-5 h-5" />
-      </Collapsible.Trigger>
+        <CaretRight
+          className={clsx('w-5 h-5 hover:scale-105 duration-200 ', {
+            'rotate-180': isSidebarOpen
+          })}
+        />
+      </Trigger>
 
       <>
         <h1 className="text-white font-bold">Dev Clients</h1>

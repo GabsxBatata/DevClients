@@ -1,6 +1,6 @@
 import { Outlet, useNavigate } from 'react-router-dom'
 import { Header } from '../header'
-import * as Collapsible from '@radix-ui/react-collapsible'
+import { Root } from '@radix-ui/react-collapsible'
 import { Sidebar } from '../sidebar'
 import { useState, useEffect } from 'react'
 
@@ -21,8 +21,8 @@ function Layout() {
   }, [])
 
   return (
-    <Collapsible.Root
-      defaultOpen={true}
+    <Root
+      defaultOpen={isSidebarOpen}
       className="h-screen w-screen bg-gray-950 text-slate-100 flex"
       onOpenChange={setIsSidebarOpen}
     >
@@ -31,7 +31,7 @@ function Layout() {
         <Header isSidebarOpen={isSidebarOpen} />
         <Outlet />
       </div>
-    </Collapsible.Root>
+    </Root>
   )
 }
 
