@@ -24,9 +24,13 @@
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^3.0.0",
     "@radix-ui/react-collapsible": "^1.1.2",
+    "@types/pouchdb": "^6.4.2",
+    "@types/pouchdb-browser": "^6.1.5",
     "clsx": "^2.1.1",
     "electron-router-dom": "^1.0.5",
     "phosphor-react": "^1.4.1",
+    "pouchdb": "^9.0.0",
+    "pouchdb-browser": "^9.0.0",
     "react-router-dom": "^7.1.1",
     "vite-plugin-static-copy": "^2.2.0"
   },
