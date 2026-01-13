@@ -4,18 +4,28 @@ import { ElectronAPI, electronAPI } from '@electron-toolkit/preload'
 declare global {
   export interface Window {
     electron: ElectronAPI
-    api: typeof api
+    api: API
   }
 }
 
+interface API {
+  onNewClient: (callback: VoidFunction) => VoidFunction
+  fetchUsers: () => Promise<void>
+}
+
 // Custom APIs for renderer
-const api = {
+const api: API = {
   onNewClient: (callback: () => void) => {
     ipcRenderer.on('new-client', callback)
 
     return () => {
       ipcRenderer.off('new-client', callback)
     }
+  },
+
+  fetchUsers: () => {
+    // INVOKE -> enviar e receber
+    return ipcRenderer.invoke('fetch-users')
   }
 }
 
