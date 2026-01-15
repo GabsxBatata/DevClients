@@ -1,6 +1,6 @@
 {
   "name": "devclients",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "An Electron application with React and TypeScript",
   "main": "./out/main/index.js",
   "author": "example.com",
@@ -24,6 +24,7 @@
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^3.0.0",
     "@radix-ui/react-collapsible": "^1.1.2",
+    "@tanstack/react-query": "^5.90.17",
     "@types/pouchdb": "^6.4.2",
     "@types/pouchdb-browser": "^6.1.5",
     "clsx": "^2.1.1",
@@ -31,7 +32,9 @@
     "phosphor-react": "^1.4.1",
     "pouchdb": "^9.0.0",
     "pouchdb-browser": "^9.0.0",
+    "react-hook-form": "^7.71.1",
     "react-router-dom": "^7.1.1",
+    "react-toastify": "^11.0.5",
     "vite-plugin-static-copy": "^2.2.0"
   },
   "devDependencies": {
