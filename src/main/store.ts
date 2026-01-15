@@ -30,7 +30,8 @@ async function addCustomer(doc: NewCustomer): PouchDBResponse {
 
   const data: Customer = {
     ...doc,
-    _id: id
+    _id: id,
+    createdAt: new Date()
   }
   return db
     .put(data)
@@ -46,7 +47,9 @@ ipcMain.handle('add-customer', async (event, doc: Customer) => {
 async function getAllCustomers(): Promise<Customer[]> {
   try {
     const result = await db.allDocs({ include_docs: true })
-    return result.rows.map((row) => row.doc as Customer)
+    return result.rows
+      .map((row) => row.doc as Customer)
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
   } catch (error) {
     console.log('Erro ao pegar clientes ', error)
     return []

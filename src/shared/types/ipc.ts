@@ -7,6 +7,7 @@ export interface Customer {
   status: boolean
   address?: string
   phone?: string
+  createdAt: Date
 }
 
-export type NewCustomer = Omit<Customer, '_id' | '_rev'>
+export type NewCustomer = Omit<Customer, '_id' | '_rev' | 'createdAt'>
