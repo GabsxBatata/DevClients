@@ -12,11 +12,11 @@ declare global {
 
 interface API {
   onNewClient: (callback: VoidFunction) => VoidFunction
-  fetchUsers: () => Promise<void>
   addCustomer: (doc: NewCustomer) => PouchDBResponse
   getAllCustomers: () => Promise<Customer[]>
   getCustomerById: (docId: string) => Promise<Customer>
   deleteCustomerById: (docId: string) => PouchDBResponse
+  getVersionApp: () => Promise<string>
 }
 
 // Custom APIs for renderer
@@ -27,10 +27,6 @@ const api: API = {
     return () => {
       ipcRenderer.off('new-client', callback)
     }
-  },
-
-  fetchUsers() {
-    return ipcRenderer.invoke('fetch-users')
   },
 
   addCustomer(doc) {
@@ -47,6 +43,10 @@ const api: API = {
 
   deleteCustomerById(docId) {
     return ipcRenderer.invoke('delete-customer-by-id', docId)
+  },
+
+  getVersionApp() {
+    return ipcRenderer.invoke('get-version')
   }
 }
 
