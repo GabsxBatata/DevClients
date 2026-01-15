@@ -27,7 +27,7 @@ function Layout() {
       onOpenChange={setIsSidebarOpen}
     >
       <Sidebar />
-      <div className="flex-1 flex-col max-h-screen">
+      <div className="flex flex-1 flex-col max-h-screen">
         <Header isSidebarOpen={isSidebarOpen} />
         <Outlet />
       </div>
