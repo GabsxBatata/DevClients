@@ -32,7 +32,6 @@ mac:
   category: public.app-category.utilities
   target:
     - dmg
-  entitlementsInherit: build/entitlements.mac.plist
   notarize: false
 
 linux:
