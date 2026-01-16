@@ -3,6 +3,7 @@ import path, { join } from 'node:path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { createFileRoute, createURLRoute } from 'electron-router-dom'
 import { createTray } from './tray'
+import { createShortcuts } from './shortcuts'
 
 import './ipc'
 import './store'
@@ -28,6 +29,7 @@ function createWindow(): void {
 
   //Chamar para criação do tray
   createTray(mainWindow)
+  createShortcuts(mainWindow)
 
   //Mudar icone para o MAC
   if (process.platform === 'darwin') {
