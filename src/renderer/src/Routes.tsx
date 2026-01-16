@@ -3,17 +3,18 @@ import { Home } from '../pages/home'
 import { About } from '../pages/about'
 import { Details } from '../pages/details'
 import { Create } from '../pages/create'
+import { Layout } from '../components/layout'
 
 export function Routes() {
   return (
     <Router
       main={
-        <>
+        <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/create" element={<Create />} />
           <Route path="/about" element={<About />} />
-          <Route path="/details" element={<Details />} />
-        </>
+          <Route path="/customer/:id" element={<Details />} />
+        </Route>
       }
     />
   )

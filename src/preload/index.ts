@@ -1,8 +1,54 @@
-import { contextBridge } from 'electron'
-import { electronAPI } from '@electron-toolkit/preload'
+import { contextBridge, ipcRenderer } from 'electron'
+import { ElectronAPI, electronAPI } from '@electron-toolkit/preload'
+import { Customer, NewCustomer } from '../shared/types/ipc'
+import { PouchDBResponse } from '../shared/types/db'
+
+declare global {
+  export interface Window {
+    electron: ElectronAPI
+    api: API
+  }
+}
+
+interface API {
+  onNewClient: (callback: VoidFunction) => VoidFunction
+  addCustomer: (doc: NewCustomer) => PouchDBResponse
+  getAllCustomers: () => Promise<Customer[]>
+  getCustomerById: (docId: string) => Promise<Customer>
+  deleteCustomerById: (docId: string) => PouchDBResponse
+  getVersionApp: () => Promise<string>
+}
 
 // Custom APIs for renderer
-const api = {}
+const api: API = {
+  onNewClient(callback) {
+    ipcRenderer.on('new-client', callback)
+
+    return () => {
+      ipcRenderer.off('new-client', callback)
+    }
+  },
+
+  addCustomer(doc) {
+    return ipcRenderer.invoke('add-customer', doc)
+  },
+
+  getAllCustomers() {
+    return ipcRenderer.invoke('get-all-customers')
+  },
+
+  getCustomerById(docId) {
+    return ipcRenderer.invoke('get-customer-by-id', docId)
+  },
+
+  deleteCustomerById(docId) {
+    return ipcRenderer.invoke('delete-customer-by-id', docId)
+  },
+
+  getVersionApp() {
+    return ipcRenderer.invoke('get-version')
+  }
+}
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise

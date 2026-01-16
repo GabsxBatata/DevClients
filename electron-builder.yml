@@ -33,11 +33,12 @@ linux:
     - AppImage
     - snap
     - deb
+    - rpm
+    - freebsd
+    - pacman
   maintainer: electronjs.org
+  synopsis: ${description}
   category: Utility
 appImage:
   artifactName: ${name}-${version}.${ext}
 npmRebuild: false
-publish:
-  provider: generic
-  url: https://example.com/auto-updates
