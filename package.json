@@ -1,7 +1,7 @@
 {
   "name": "devclients",
   "productName": "DevClients",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Sistema para gerenciar clientes",
   "main": "./out/main/index.js",
   "author": "GabsxBatata",
