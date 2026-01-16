@@ -2,6 +2,8 @@ appId: com.electron.app
 productName: devclients
 directories:
   buildResources: build
+  output: dist
+
 files:
   - '!**/.vscode/*'
   - '!src/*'
@@ -9,36 +11,41 @@ files:
   - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
   - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
   - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
+
 asarUnpack:
   - resources/**
+
 win:
   executableName: devclients
+  target:
+    - nsis
+
 nsis:
-  artifactName: ${name}-${version}-setup.${ext}
-  shortcutName: ${productName}
-  uninstallDisplayName: ${productName}
+  artifactName: '${productName}-${version}-setup.${ext}'
+  shortcutName: '${productName}'
+  uninstallDisplayName: '${productName}'
   createDesktopShortcut: always
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+
 mac:
+  category: public.app-category.utilities
+  target:
+    - dmg
   entitlementsInherit: build/entitlements.mac.plist
-  extendInfo:
-    - NSCameraUsageDescription: Application requests access to the device's camera.
-    - NSMicrophoneUsageDescription: Application requests access to the device's microphone.
-    - NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
-    - NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
   notarize: false
-dmg:
-  artifactName: ${name}-${version}.${ext}
+
 linux:
+  maintainer: GabsxBatata
+  category: Utility
+  synopsis: 'Sistema para gerenciar clientes'
   target:
     - AppImage
-    - snap
     - deb
     - rpm
-    - freebsd
-    - pacman
-  maintainer: electronjs.org
-  synopsis: ${description}
-  category: Utility
+    - snap
+
 appImage:
-  artifactName: ${name}-${version}.${ext}
+  artifactName: '${productName}-${version}.${ext}'
+
 npmRebuild: false
