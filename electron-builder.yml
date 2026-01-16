@@ -15,6 +15,8 @@ files:
 asarUnpack:
   - resources/**
 
+npmRebuild: false
+
 win:
   executableName: devclients
   target:
@@ -42,9 +44,6 @@ linux:
     - AppImage
     - deb
     - rpm
-    - snap
 
 appImage:
   artifactName: '${productName}-${version}.${ext}'
-
-npmRebuild: false
